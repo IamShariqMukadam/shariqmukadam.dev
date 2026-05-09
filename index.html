@@ -3088,14 +3088,14 @@
     heroSlides[currentSlide].classList.add('active');
     heroDots[currentSlide].classList.add('active');
     clearInterval(slideTimer);
-    slideTimer = setInterval(nextSlide, 5000);
+    slideTimer = setInterval(nextSlide, 8000);
   }
 
   function nextSlide() {
     goToSlide((currentSlide + 1) % heroSlides.length);
   }
 
-  slideTimer = setInterval(nextSlide, 5000);
+  slideTimer = setInterval(nextSlide, 7000);
 
   /* Slide 2 resume button */
   var hBtn2 = document.getElementById('heroResumeBtn2');
