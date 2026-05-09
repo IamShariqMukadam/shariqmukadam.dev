@@ -174,7 +174,7 @@
       width: 100%;
       z-index: 1000;
       background: rgba(255, 255, 255, 0.97);
-      padding: 18px 0;
+      padding: 28px 0;
       transition: padding 0.35s ease, box-shadow 0.35s ease;
       backdrop-filter: blur(8px);
     }
@@ -203,10 +203,11 @@
        - color       → logo text color (currently black)
     ─────────────────────────────────────────────────────────── */
     .nav-logo {
-      font-size: 1.65rem;
+      font-size: 1.75rem;
       font-weight: 800;
       color: #000;
-      letter-spacing: -0.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
       transition: opacity 0.2s;
     }
 
@@ -297,11 +298,11 @@
     .btn-resume {
       background: #000;
       color: var(--red);
-      border: 2px solid var(--red);
-      padding: 7px 20px;
+      border: 3px solid var(--red);
+      padding: 10px 22px;
       font-size: 0.75rem;
       font-weight: 700;
-      border-radius: 4px;
+      border-radius: 10px;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
       letter-spacing: 0.5px;
@@ -1825,7 +1826,7 @@
           <button class="btn-resume" id="navResumeBtn"
                   data-testid="nav-resume-btn"
                   aria-haspopup="true" aria-expanded="false">
-            Resume <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
+            RESUME <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
           </button>
 
           <div class="resume-dropdown" id="navResumeDropdown" data-testid="nav-resume-dropdown">
