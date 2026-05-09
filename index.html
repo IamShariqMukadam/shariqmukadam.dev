@@ -467,10 +467,83 @@
     }
 
     /* Diagonal background split: white left / light gray right */
+    /* ── HERO SLIDER ─────────────────────────────────────────── */
+    .hero-slides-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+    }
+
+    /* Slide 2 right side: white bg since right bg is now black */
+    .slide2-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin-bottom: 18px;
+    }
+
+    .slide2-heading-big {
+      display: block;
+      font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+      font-weight: 800;
+      color: var(--red);
+      line-height: 1.05;
+    }
+
+    .slide2-heading-name {
+      display: block;
+      font-size: clamp(1.4rem, 2.8vw, 2.8rem);
+      font-weight: 700;
+      color: #111;
+      margin-top: 8px;
+    }
+
+    /* Slider dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero-dot.active {
+      background: var(--red);
+    }
     .hero-split {
       position: absolute;
       inset: 0;
-      background: linear-gradient(108deg, #ffffff 55%, #f5f5f5 55%);
+      background: linear-gradient(108deg, #ffffff 52%, #000000 52%);
       z-index: 0;
     }
 
@@ -1893,85 +1966,123 @@
      - Your photo → replace .hero-photo div with an <img> tag
                     (instructions in the comment below)
 ════════════════════════════════════════════════════════════ -->
-<section id="home" data-testid="hero-section">
+<section id="home" data-testid="hero-section" style="position:relative; min-height:100vh; overflow:hidden;">
 
-  <!-- Diagonal white/gray split background -->
+  <!-- Diagonal black/white split background -->
   <div class="hero-split"></div>
 
-  <div class="hero-inner">
+  <!-- SLIDE WRAPPER -->
+  <div class="hero-slides-wrap">
 
-    <!-- LEFT: Animated text content -->
-    <div class="hero-content">
+    <!-- ═══ SLIDE 1 — Hi I am SHariq Mukadam ═══ -->
+    <div class="hero-slide active" id="heroSlide1">
+      <div class="hero-inner">
 
-      <!-- Small uppercase tag above the main heading -->
-      <span class="hero-tag" data-testid="hero-tag">
-        Data Scientist &amp; Data Analyst
-      </span>
-
-      <!-- 3-line main heading — each line animates in with a stagger -->
-      <div class="hero-heading-wrap">
-        <span class="hero-hl hero-hl-1" data-testid="hero-line1">Hi, I am</span>
-        <span class="hero-hl hero-hl-2" data-testid="hero-line2">
-          <span class="red">Shariq Mukadam</span>
-        </span>
-        <span class="hero-hl hero-hl-3" data-testid="hero-line3">
-          This is my favorite work.
-        </span>
-      </div>
-
-      <!-- CTA Buttons row -->
-      <div class="hero-btns" data-testid="hero-btns">
-
-        <!-- Download Resume with dropdown (DS / DA) -->
-        <div class="hero-resume-wrap">
-          <button class="btn-dl-resume" id="heroResumeBtn" data-testid="hero-resume-btn">
-            Download Resume <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
-          </button>
-          <div class="hero-resume-dropdown" id="heroResumeDropdown" data-testid="hero-resume-dropdown">
-            <!-- Replace href below with your actual DS resume PDF link -->
-            <a href="#" data-testid="hero-ds-resume">DS Resume</a>
-            <!-- Replace href below with your actual DA resume PDF link -->
-            <a href="#" data-testid="hero-da-resume">DA Resume</a>
+        <!-- LEFT TEXT -->
+        <div class="hero-content">
+          <span class="hero-tag">Data Scientist &amp; Data Analyst</span>
+          <div class="hero-heading-wrap">
+            <span class="hero-hl hero-hl-1">Hi, I am</span>
+            <span class="hero-hl hero-hl-2"><span class="red">SHariq</span> Mukadam.</span>
+            <span class="hero-hl hero-hl-3">This is my favorite work.</span>
+          </div>
+          <div class="hero-btns">
+            <div class="hero-resume-wrap">
+              <button class="btn-dl-resume" id="heroResumeBtn" data-testid="hero-resume-btn">
+                Download Resume <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
+              </button>
+              <div class="hero-resume-dropdown" id="heroResumeDropdown" data-testid="hero-resume-dropdown">
+                <!-- Replace href with your DS resume PDF link -->
+                <a href="#" data-testid="hero-ds-resume">DS Resume</a>
+                <!-- Replace href with your DA resume PDF link -->
+                <a href="#" data-testid="hero-da-resume">DA Resume</a>
+              </div>
+            </div>
+            <a href="#projects" class="btn-projects">My Projects</a>
           </div>
         </div>
 
-        <!-- My Projects — smooth scrolls to #projects -->
-        <a href="#projects" class="btn-projects" data-testid="hero-projects-btn">My Projects</a>
+        <!-- RIGHT IMAGE — Slide 1 -->
+        <div class="hero-img-wrap">
+          <div class="deco-sq-1" aria-hidden="true"></div>
+          <div class="deco-sq-2" aria-hidden="true"></div>
+          <div class="deco-dots-grid" aria-hidden="true"></div>
+          <div class="deco-circle-outline" aria-hidden="true"></div>
 
-      </div><!-- /hero-btns -->
+          <!--
+            ✏️ SLIDE 1 PHOTO — replace div below with:
+            <img src="photo1.jpg" alt="SHariq Mukadam"
+                 style="width:100%;max-width:430px;height:530px;
+                        object-fit:cover;object-position:center top;border-radius:10px;">
+          -->
+          <div class="hero-photo" data-testid="hero-photo-placeholder">
+            <div class="hero-photo-overlay"></div>
+            <i class="fas fa-user hero-photo-icon" aria-hidden="true"></i>
+          </div>
+        </div>
 
-    </div><!-- /hero-content -->
+      </div><!-- /hero-inner -->
+    </div><!-- /slide1 -->
 
 
-    <!-- RIGHT: Avatar placeholder + geometric shapes -->
-    <div class="hero-img-wrap" data-testid="hero-img-wrap">
+    <!-- ═══ SLIDE 2 — Data Scientist & Data Analyst ═══ -->
+    <div class="hero-slide" id="heroSlide2">
+      <div class="hero-inner">
 
-      <!-- Decorative black geometric shapes behind the photo -->
-      <div class="deco-sq-1" aria-hidden="true"></div>        <!-- rotated square, top-right -->
-      <div class="deco-sq-2" aria-hidden="true"></div>        <!-- small square, bottom-left -->
-      <div class="deco-dots-grid" aria-hidden="true"></div>   <!-- dot grid, bottom-right -->
-      <div class="deco-circle-outline" aria-hidden="true"></div> <!-- circle ring, top-left -->
+        <!-- LEFT TEXT -->
+        <div class="hero-content">
+          <span class="slide2-tag">Hello! This is Shariq</span>
+          <div class="hero-heading-wrap">
+            <span class="slide2-heading-big">Data Scientist &amp;</span>
+            <span class="slide2-heading-big">Data Analyst</span>
+            <span class="slide2-heading-name">Shariq Mukadam</span>
+          </div>
+          <div class="hero-btns" style="opacity:1;animation:none;">
+            <div class="hero-resume-wrap">
+              <button class="btn-dl-resume" id="heroResumeBtn2">
+                Download Resume <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
+              </button>
+              <div class="hero-resume-dropdown" id="heroResumeDropdown2">
+                <!-- Replace href with your DS resume PDF link -->
+                <a href="#">DS Resume</a>
+                <!-- Replace href with your DA resume PDF link -->
+                <a href="#">DA Resume</a>
+              </div>
+            </div>
+            <a href="#projects" class="btn-projects">My Projects</a>
+          </div>
+        </div>
 
-      <!--
-        ✏️ TO ADD YOUR PHOTO:
-        Delete the entire .hero-photo div below and replace with:
+        <!-- RIGHT IMAGE — Slide 2 -->
+        <div class="hero-img-wrap" style="animation:none;opacity:1;">
+          <div class="deco-sq-1" aria-hidden="true"></div>
+          <div class="deco-sq-2" aria-hidden="true"></div>
+          <div class="deco-dots-grid" aria-hidden="true"></div>
+          <div class="deco-circle-outline" aria-hidden="true"></div>
 
-        <img src="your-photo.jpg"
-             alt="Shariq Mukadam"
-             style="width:100%; max-width:430px; height:530px;
-                    object-fit:cover; border-radius:10px;">
+          <!--
+            ✏️ SLIDE 2 PHOTO — replace div below with:
+            <img src="photo2.jpg" alt="SHariq Mukadam"
+                 style="width:100%;max-width:430px;height:530px;
+                        object-fit:cover;object-position:center top;border-radius:10px;">
+          -->
+          <div class="hero-photo">
+            <div class="hero-photo-overlay"></div>
+            <i class="fas fa-user hero-photo-icon" aria-hidden="true"></i>
+          </div>
+        </div>
 
-        Tip: use object-position to crop to your face if needed:
-             object-position: center top;
-      -->
-      <div class="hero-photo" data-testid="hero-photo-placeholder">
-        <div class="hero-photo-overlay"></div>
-        <i class="fas fa-user hero-photo-icon" aria-hidden="true"></i>
-      </div>
+      </div><!-- /hero-inner -->
+    </div><!-- /slide2 -->
 
-    </div><!-- /hero-img-wrap -->
+  </div><!-- /hero-slides-wrap -->
 
-  </div><!-- /hero-inner -->
+  <!-- Slide indicator dots -->
+  <div class="hero-dots">
+    <div class="hero-dot active" onclick="goToSlide(0)"></div>
+    <div class="hero-dot" onclick="goToSlide(1)"></div>
+  </div>
+
 </section>
 
 
@@ -2966,6 +3077,38 @@
      - Ring animation duration → find "1.5s cubic-bezier" in CSS above
 ════════════════════════════════════════════════════════════ -->
 <script>
+  /* ── HERO SLIDER ─────────────────────────────────────────── */
+  var heroSlides = [document.getElementById('heroSlide1'), document.getElementById('heroSlide2')];
+  var heroDots   = document.querySelectorAll('.hero-dot');
+  var currentSlide = 0;
+  var slideTimer;
+
+  function goToSlide(n) {
+    heroSlides[currentSlide].classList.remove('active');
+    heroDots[currentSlide].classList.remove('active');
+    currentSlide = n;
+    heroSlides[currentSlide].classList.add('active');
+    heroDots[currentSlide].classList.add('active');
+    clearInterval(slideTimer);
+    slideTimer = setInterval(nextSlide, 5000);
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % heroSlides.length);
+  }
+
+  slideTimer = setInterval(nextSlide, 5000);
+
+  /* Slide 2 resume button */
+  var hBtn2 = document.getElementById('heroResumeBtn2');
+  var hDrop2 = document.getElementById('heroResumeDropdown2');
+  if (hBtn2) {
+    hBtn2.addEventListener('click', function(e) {
+      e.stopPropagation();
+      hDrop2.classList.toggle('open');
+    });
+  }
+  /* ─────────────────────────────────────────────────────────── */
 (function () {
   'use strict';
 
