@@ -973,6 +973,7 @@
 
     .skills-section-head {
       margin-bottom: 44px;
+      text-align: center;
     }
 
     /* "My Skills" heading with red underline bar */
@@ -991,6 +992,7 @@
       position: absolute;
       bottom: 0;
       left: 0;
+      transform: translateX(-50%);
       width: 56px;  /* TO EDIT: change underline width */
       height: 4px;
       background: var(--red);
@@ -1010,6 +1012,7 @@
       gap: 10px;
       margin-bottom: 40px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .skill-tab {
@@ -2223,8 +2226,8 @@
 
     <!-- Tab buttons: DS / DA / Frontend -->
     <div class="skills-tabs reveal" data-testid="skills-tabs">
-      <button class="skill-tab active" data-tab="tab-ds" data-testid="skill-tab-ds">DS</button>
-      <button class="skill-tab"        data-tab="tab-da" data-testid="skill-tab-da">DA</button>
+      <button class="skill-tab active" data-tab="tab-ds" data-testid="skill-tab-ds">Data Science</button>
+      <button class="skill-tab"        data-tab="tab-da" data-testid="skill-tab-da">Data Analytics</button>
       <button class="skill-tab"        data-tab="tab-fe" data-testid="skill-tab-fe">Frontend</button>
     </div>
 
