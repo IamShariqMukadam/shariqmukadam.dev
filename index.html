@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       META & SEO
+       Open Graph + Twitter cards, canonical to shariqmukadam.me
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SHariq Mukadam – Web Developer & Data Analyst | shariqmukadam.me" />
+  <meta name="author" content="SHariq Mukadam" />
+  <link rel="canonical" href="https://shariqmukadam.me" />
+  <meta property="og:title" content="SHariq Mukadam | Web Developer & Data Analyst" />
+  <meta property="og:description" content="CS Student passionate about Data Science, Data Analytics and Frontend Development." />
+  <meta property="og:url" content="https://shariqmukadam.me" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://shariqmukadam.me/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SHariq Mukadam | Portfolio" />
+  <meta name="twitter:description" content="Web Developer & Data Analyst – shariqmukadam.me" />
+  <title>SHariq Mukadam | Web Developer &amp; Data Analyst</title>
+
+  <!-- Google Fonts: Poppins 400/600/700/800 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: 'rgb(209,0,44)' },
+          fontFamily: { poppins: ['Poppins', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+       Universal box-sizing, smooth scroll, Poppins, #111 body text
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #111111;
+      background: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    :root {
+      --red: rgb(209,0,44);
+      --red-dark: rgb(170,0,35);
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    section { padding: 90px 0; }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ============================================================
+       NAVBAR
+       - Fixed, white bg with blur
+       - Logo: ShariqM. with animated dot (red on scroll)
+       - 5 nav links + Resume dropdown button
+       - Mobile hamburger
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      padding: 18px 0;
+      transition: padding 0.35s ease, box-shadow 0.35s ease;
+      backdrop-filter: blur(8px);
+    }
+    #navbar.scrolled {
+      padding: 10px 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #000;
+      letter-spacing: -0.5px;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.8; }
+    /* The dot animates to red on scroll via .scrolled class */
+    .logo-dot {
+      color: #000;
+      transition: color 0.4s ease;
+    }
+    #navbar.scrolled .logo-dot { color: var(--red); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--red);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--red); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    /* Resume dropdown button */
+    .resume-wrap { position: relative; }
+    .btn-resume {
+      background: #000;
+      color: var(--red);
+      border: 2px solid var(--red);
+      padding: 7px 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-resume:hover { background: var(--red); color: #fff; }
+    .resume-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #000;
+      border: 1px solid rgba(209,0,44,0.35);
+      border-radius: 4px;
+      min-width: 150px;
+      display: none;
+      z-index: 200;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .resume-dropdown.open { display: block; }
+    .resume-dropdown a {
+      display: block;
+      padding: 11px 18px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--red);
+      transition: background 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .resume-dropdown a:hover { background: rgba(255,255,255,0.07); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2px;
+      background: #111;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: #fff;
+      padding: 0 28px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      border-top: 1px solid #f0f0f0;
+    }
+    .mobile-nav.open {
+      display: flex;
+      max-height: 420px;
+      padding: 8px 28px 24px;
+    }
+    .mobile-nav a {
+      padding: 11px 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #f5f5f5;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--red); }
+    .mob-resume-label {
+      padding: 11px 0 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .mob-resume-link {
+      padding: 9px 0 9px 14px !important;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 0.82rem !important;
+      color: var(--red) !important;
+    }
+
+    /* ============================================================
+       HERO SECTION
+       - White/f5f5f5 diagonal split bg
+       - Small red tag, 3-line staggered heading
+       - Geometric shapes + avatar placeholder on right
+       - Download Resume dropdown + My Projects CTA
+    ============================================================ */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+    .hero-split {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(108deg, #ffffff 55%, #f5f5f5 55%);
+      z-index: 0;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 28px 60px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+    /* Each line slides up with stagger */
+    .hero-hl {
+      display: block;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 800;
+      color: #111;
+      line-height: 1.05;
+      opacity: 0;
+    }
+    .hero-hl .red { color: var(--red); }
+    .hero-hl-1 { animation: fadeUp 0.7s ease 0.25s forwards; }
+    .hero-hl-2 { animation: fadeUp 0.7s ease 0.55s forwards; }
+    .hero-hl-3 {
+      font-size: clamp(1.6rem, 3.2vw, 3.2rem);
+      animation: fadeUp 0.7s ease 0.85s forwards;
+    }
+    .hero-heading-wrap { margin-bottom: 40px; }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.1s forwards;
+    }
+    /* Download Resume button (black bg white text with dropdown) */
+    .hero-resume-wrap { position: relative; display: inline-block; }
+    .btn-dl-resume {
+      background: #000;
+      color: #fff;
+      padding: 14px 36px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-dl-resume:hover {
+      background: #1a1a1a;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .hero-resume-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: #000;
+      border: 1px solid rgba(209,0,44,0.35);
+      border-radius: 4px;
+      min-width: 150px;
+      display: none;
+      z-index: 200;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+    }
+    .hero-resume-dropdown.open { display: block; }
+    .hero-resume-dropdown a {
+      display: block;
+      padding: 11px 18px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--red);
+      transition: background 0.2s;
+    }
+    .hero-resume-dropdown a:hover { background: rgba(255,255,255,0.07); }
+
+    /* My Projects outlined button */
+    .btn-projects {
+      border: 2px solid var(--red);
+      color: var(--red);
+      padding: 12px 36px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      transition: all 0.25s;
+    }
+    .btn-projects:hover {
+      background: var(--red);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(209,0,44,0.3);
+    }
+
+    /* Hero image area + geometric decorative shapes */
+    .hero-img-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      opacity: 0;
+      animation: fadeRight 0.8s ease 0.6s forwards;
+    }
+    /* Geometric shapes — pure #000 with opacity variations for depth */
+    .deco-sq-1 {
+      position: absolute;
+      width: 74px; height: 74px;
+      border: 2.5px solid rgba(0,0,0,0.14);
+      top: 26px; right: 6px;
+      transform: rotate(16deg);
+      pointer-events: none;
+    }
+    .deco-sq-2 {
+      position: absolute;
+      width: 46px; height: 46px;
+      background: rgba(0,0,0,0.07);
+      bottom: 72px; left: 2px;
+      transform: rotate(-9deg);
+      pointer-events: none;
+    }
+    .deco-dots-grid {
+      position: absolute;
+      bottom: 44px; right: -8px;
+      width: 84px; height: 84px;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.22) 1.5px, transparent 1.5px);
+      background-size: 14px 14px;
+      pointer-events: none;
+    }
+    .deco-circle-outline {
+      position: absolute;
+      width: 115px; height: 115px;
+      border: 2px solid rgba(0,0,0,0.09);
+      border-radius: 50%;
+      top: -18px; left: -6px;
+      pointer-events: none;
+    }
+    /* Avatar placeholder — replace with <img> */
+    .hero-photo {
+      width: 100%;
+      max-width: 430px;
+      height: 530px;
+      background: linear-gradient(155deg, #1c1c1c 0%, #2e2e2e 40%, #404040 80%, #555 100%);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    }
+    .hero-photo-icon {
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(255,255,255,0.1);
+      font-size: 8.5rem;
+    }
+
+    /* ============================================================
+       ABOUT SECTION (id="about")
+       - NO photo
+       - Two-column: bio left, contact info cards right
+       - Contact cards: 4px red left border, gray label, bold value
+       - No interest tags
+    ============================================================ */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+    .about-main-heading {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--red);
+      margin-bottom: 28px;
+      line-height: 1.2;
+    }
+    .about-para {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+    .about-info-col { padding-top: 4px; }
+    .about-info-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    /* Each contact row: red left border 4px */
+    .aci-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border-left: 4px solid var(--red);
+      padding: 10px 0 10px 16px;
+      margin-bottom: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s, padding-left 0.2s;
+      border-radius: 0 4px 4px 0;
+    }
+    .aci-row:hover { background: rgba(209,0,44,0.04); padding-left: 20px; }
+    .aci-icon {
+      width: 38px; height: 38px;
+      background: #000;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .aci-row:hover .aci-icon { background: var(--red); color: #fff; }
+    .aci-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+    .aci-val {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #111;
+      word-break: break-all;
+    }
+
+    /* ============================================================
+       SKILLS SECTION (id="skills")
+       - Section bg: white
+       - 3 pill tabs: DS · DA · Frontend
+       - Active tab: black bg, white text, red border
+       - 4-per-row black cards with red SVG progress rings
+       - Ring: stroke red, track #333, % in red, name in white
+       - No Low/Mid/High stat rows
+       - Re-triggers ring animation on tab switch
+    ============================================================ */
+    #skills { background: #ffffff; }
+    .skills-section-head { margin-bottom: 44px; }
+    .skills-main-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #111;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 14px;
+    }
+    .skills-main-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 56px; height: 4px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+    /* Tabs */
+    .skills-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .skill-tab {
+      padding: 9px 30px;
+      border-radius: 40px;
+      border: 2px solid #ddd;
+      background: #fff;
+      color: #111;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      transition: all 0.22s;
+    }
+    .skill-tab:hover:not(.active) { border-color: #111; }
+    .skill-tab.active {
+      background: #000;
+      color: #fff;
+      border-color: var(--red);
+    }
+    /* Pane visibility */
+    .skill-pane { display: none; }
+    .skill-pane.active { display: block; }
+    /* 4-per-row grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    /* Black card with red glow */
+    .skill-card {
+      background: #000;
+      border-radius: 10px;
+      padding: 32px 16px 26px;
+      text-align: center;
+      box-shadow: 0 0 22px rgba(209,0,44,0.1), 0 6px 22px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 38px rgba(209,0,44,0.22), 0 12px 36px rgba(0,0,0,0.28);
+    }
+    .ring-wrap {
+      position: relative;
+      width: 118px;
+      height: 118px;
+      margin: 0 auto 18px;
+    }
+    .ring-wrap svg { width: 118px; height: 118px; }
+    .ring-bg { fill: none; stroke: #333; stroke-width: 9; }
+    .ring-progress {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 9;
+      stroke-linecap: round;
+      stroke-dasharray: 307.88 307.88;
+      stroke-dashoffset: 307.88;
+      transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .ring-pct {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--red);
+    }
+    .skill-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* ============================================================
+       CTA BANNER
+       - Minimal height: thin black strip
+       - Text inline with button, NO image/avatar
+    ============================================================ */
+    #cta-banner {
+      background: #000;
+      padding: 30px 0;
+    }
+    .cta-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .cta-text {
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 800;
+      color: #fff;
+    }
+    .btn-cta {
+      background: var(--red);
+      color: #fff;
+      padding: 13px 38px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-cta:hover {
+      background: var(--red-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(209,0,44,0.4);
+    }
+
+    /* ============================================================
+       PROJECTS SECTION (id="projects")
+       - 2 pill tabs: Data Science · Data Analytics
+       - 3 cards per tab
+       - White bg, black shadow, red top border 4px
+       - Hover: dark overlay slides up with 2 side-by-side buttons
+       - View Live (red bg, white text) + GitHub Repo (black bg, white text, red border)
+    ============================================================ */
+    #projects { background: #fff; }
+    .section-head { margin-bottom: 52px; }
+    .section-h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .projects-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .proj-tab {
+      padding: 9px 30px;
+      border-radius: 40px;
+      border: 2px solid #ddd;
+      background: #fff;
+      color: #111;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      transition: all 0.22s;
+    }
+    .proj-tab:hover:not(.active) { border-color: #111; }
+    .proj-tab.active {
+      background: #000;
+      color: #fff;
+      border-color: var(--red);
+    }
+    .proj-pane { display: none; }
+    .proj-pane.active { display: block; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: 8px;
+      border-top: 4px solid var(--red);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+    }
+    .proj-card-body { padding: 26px 22px 22px; }
+    .proj-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .proj-card-desc {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .proj-tag {
+      background: #111;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+    }
+    /* Hover overlay: slides up from bottom */
+    .proj-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    .project-card:hover .proj-overlay { transform: translateY(0); }
+    .btn-view-live {
+      background: var(--red);
+      color: #fff;
+      padding: 10px 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 4px;
+      display: inline-block;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-view-live:hover { background: var(--red-dark); }
+    .btn-github-repo {
+      background: #000;
+      color: #fff;
+      border: 2px solid var(--red);
+      padding: 8px 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 4px;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-github-repo:hover { background: var(--red); border-color: var(--red); }
+
+    /* ============================================================
+       CERTIFICATIONS SECTION (id="certifications")
+       - 3-col card grid
+       - Red top border 4px, black shadow
+       - Issuer initials circle: black bg, white text
+       - Hover: translateY(-4px)
+    ============================================================ -->
+    */
+    #certifications { background: #f9f9f9; }
+    .cert-section-head { margin-bottom: 52px; }
+    .cert-main-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #111;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 14px;
+    }
+    .cert-main-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 56px; height: 4px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    /* Duplicate .cert-card blocks for each real certification */
+    .cert-card {
+      background: #fff;
+      border-radius: 8px;
+      border-top: 4px solid var(--red);
+      padding: 28px 22px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 38px rgba(0,0,0,0.12);
+    }
+    /* Initials circle: black bg, white text */
+    .cert-logo {
+      width: 50px; height: 50px;
+      background: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+    .cert-title { font-size: 0.9rem; font-weight: 700; color: #111; margin-bottom: 6px; line-height: 1.45; }
+    .cert-org { font-size: 0.82rem; font-weight: 700; color: var(--red); margin-bottom: 5px; }
+    .cert-date { font-size: 0.76rem; color: #aaa; margin-bottom: 18px; }
+    .cert-link {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--red);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .cert-link:hover { border-color: var(--red); }
+
+    /* ============================================================
+       CONTACT SECTION (id="contact")
+       - No subtitle
+       - Two-column: form left, Let's Connect right
+       - Right shows ONLY: Email, Phone, LinkedIn
+       - Form submits via fetch to FormSubmit.co
+    ============================================================ */
+    #contact { background: #fff; }
+    .contact-head { margin-bottom: 52px; }
+    .contact-h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #111;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+    .form-group { margin-bottom: 22px; }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #111;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      color: #111;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(209,0,44,0.09);
+    }
+    .form-group textarea { min-height: 145px; resize: vertical; }
+    .btn-submit {
+      background: var(--red);
+      color: #fff;
+      padding: 14px 44px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-submit:hover {
+      background: var(--red-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(209,0,44,0.3);
+    }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
+    .form-msg {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 18px;
+      background: #000;
+      color: #fff;
+      border-left: 4px solid var(--red);
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+    .contact-info-side { padding-top: 6px; }
+    .ci-tag {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+    }
+    .ci-title {
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 32px;
+      line-height: 1.3;
+    }
+    .ci-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 26px; }
+    .ci-icon {
+      width: 42px; height: 42px;
+      background: #000;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .ci-item:hover .ci-icon { background: var(--red); color: #fff; }
+    .ci-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+    .ci-val {
+      font-size: 0.88rem;
+      color: #111;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .ci-val a { color: #111; transition: color 0.2s; }
+    .ci-val a:hover { color: var(--red); }
+
+    /* ============================================================
+       FOOTER (MINIMAL)
+       - Single slim bar, white bg, black text
+       - "SHariq Mukadam" in red
+       - Border-top: 1px solid #eee
+    ============================================================ */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #eee;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 0.8rem;
+      color: #111;
+      line-height: 1.6;
+    }
+    .footer-name { color: var(--red); font-weight: 700; }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 22px; }
+    }
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 70px 0; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; padding-top: 110px; }
+      .hero-btns { justify-content: center; }
+      .hero-img-wrap { display: none; }
+      .hero-split { background: #fff; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
+      .hamburger { display: flex; }
+      .nav-right { display: none; }
+      .cta-strip { justify-content: center; text-align: center; }
+    }
+    @media (max-width: 540px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .hero-hl { font-size: 2.4rem; }
+      .hero-hl-3 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     - Logo: ShariqM. with dot animating to red on scroll (80px threshold)
+     - Links: Home · Skills · Projects · Certifications · Contact
+     - Resume button with DS/DA dropdown (closes on outside click)
+     - Mobile hamburger toggle
+============================================================ -->
+<nav id="navbar" data-testid="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" data-testid="nav-logo">ShariqM<span class="logo-dot">.</span></a>
+
+      <!-- Desktop nav links + resume button -->
+      <div class="nav-right" id="navRight">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="active" data-testid="nav-home">Home</a></li>
+          <li><a href="#skills" data-testid="nav-skills">Skills</a></li>
+          <li><a href="#projects" data-testid="nav-projects">Projects</a></li>
+          <li><a href="#certifications" data-testid="nav-certs">Certifications</a></li>
+          <li><a href="#contact" data-testid="nav-contact">Contact</a></li>
+        </ul>
+        <div class="resume-wrap" id="navResumeWrap">
+          <button class="btn-resume" id="navResumeBtn" data-testid="nav-resume-btn" aria-haspopup="true" aria-expanded="false">
+            Resume <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
+          </button>
+          <div class="resume-dropdown" id="navResumeDropdown" data-testid="nav-resume-dropdown">
+            <!-- Replace href with actual DS resume PDF link -->
+            <a href="#" data-testid="nav-ds-resume">DS Resume</a>
+            <!-- Replace href with actual DA resume PDF link -->
+            <a href="#" data-testid="nav-da-resume">DA Resume</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hamburger for mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" data-testid="hamburger-btn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile navigation menu -->
+    <div class="mobile-nav" id="mobileNav" data-testid="mobile-nav">
+      <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+      <span class="mob-resume-label">Resume</span>
+      <!-- Replace href with actual DS resume PDF link -->
+      <a href="#" class="mob-resume-link">DS Resume</a>
+      <!-- Replace href with actual DA resume PDF link -->
+      <a href="#" class="mob-resume-link">DA Resume</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO SECTION
+     - Tag: "WEB DEVELOPER & DATA ANALYST" in red
+     - 3-line staggered heading: Hi, I am / SHariq Mukadam. / This is my favorite work.
+     - SHariq in red; all lines use fadeUp with 0.3s stagger
+     - Geometric shapes: squares, dots grid, circle outline — pure #000
+     - Avatar placeholder (replace comment below with <img>)
+     - CTA: Download Resume (dropdown) + My Projects (outline)
+============================================================ -->
+<section id="home" data-testid="hero-section">
+  <div class="hero-split"></div>
+  <div class="hero-inner">
+    <!-- Left: Text content -->
+    <div class="hero-content">
+      <!-- Small tag above heading -->
+      <span class="hero-tag" data-testid="hero-tag">Web Developer &amp; Data Analyst</span>
+
+      <!-- Main heading — 3 lines animate with 0.3s stagger -->
+      <div class="hero-heading-wrap">
+        <span class="hero-hl hero-hl-1" data-testid="hero-line1">Hi, I am</span>
+        <span class="hero-hl hero-hl-2" data-testid="hero-line2"><span class="red">SHariq</span> Mukadam.</span>
+        <span class="hero-hl hero-hl-3" data-testid="hero-line3">This is my favorite work.</span>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero-btns" data-testid="hero-btns">
+        <!-- Download Resume with dropdown -->
+        <div class="hero-resume-wrap">
+          <button class="btn-dl-resume" id="heroResumeBtn" data-testid="hero-resume-btn">
+            Download Resume <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
+          </button>
+          <div class="hero-resume-dropdown" id="heroResumeDropdown" data-testid="hero-resume-dropdown">
+            <!-- Replace href with actual DS resume PDF link -->
+            <a href="#" data-testid="hero-ds-resume">DS Resume</a>
+            <!-- Replace href with actual DA resume PDF link -->
+            <a href="#" data-testid="hero-da-resume">DA Resume</a>
+          </div>
+        </div>
+        <!-- My Projects scrolls to #projects -->
+        <a href="#projects" class="btn-projects" data-testid="hero-projects-btn">My Projects</a>
+      </div>
+    </div>
+
+    <!-- Right: Avatar + geometric shapes -->
+    <div class="hero-img-wrap" data-testid="hero-img-wrap">
+      <!-- Decorative geometric shapes — pure #000 with opacity depth -->
+      <div class="deco-sq-1" aria-hidden="true"></div>
+      <div class="deco-sq-2" aria-hidden="true"></div>
+      <div class="deco-dots-grid" aria-hidden="true"></div>
+      <div class="deco-circle-outline" aria-hidden="true"></div>
+      <!-- Replace the div below with: <img src="your-photo.jpg" alt="SHariq Mukadam" style="width:100%;max-width:430px;height:530px;object-fit:cover;border-radius:10px;"> -->
+      <div class="hero-photo" data-testid="hero-photo-placeholder">
+        <div class="hero-photo-overlay"></div>
+        <i class="fas fa-user hero-photo-icon" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT ME SECTION (id="about")
+     - NO photo anywhere in this section
+     - Two-column: bio text left, contact info cards right
+     - About Me heading is red
+     - 3–4 paragraphs: CS student, DS/DA/Frontend, problem solver, open to opportunities
+     - Contact cards: 4px red left border, gray label, bold value
+     - Social links: Email, Phone, LinkedIn, GitHub, LeetCode
+     - Interest tags removed
+============================================================ -->
+<section id="about" data-testid="about-section">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Left: Bio text -->
+      <div class="reveal" data-testid="about-bio-col">
+        <h2 class="about-main-heading">About Me</h2>
+        <p class="about-para">
+          I'm SHariq Mukadam, a Computer Science student with a deep passion for turning data
+          into meaningful stories. My journey spans Data Science, Data Analytics, and Frontend
+          Development — three fields I believe work best when they intersect.
+        </p>
+        <p class="about-para">
+          I love working with data — whether it's building predictive models with Python and
+          Scikit-Learn, crafting interactive dashboards in Power BI and Tableau, or creating
+          clean, responsive web interfaces with React and Tailwind CSS. I believe that
+          great insights and great user experience go hand in hand.
+        </p>
+        <p class="about-para">
+          I approach every problem with curiosity and a structured mindset — breaking down
+          complexity into clear, actionable solutions. I'm always learning, currently exploring
+          deep learning and advanced analytics techniques to push the boundaries of what's possible.
+        </p>
+        <p class="about-para">
+          I'm actively open to opportunities — internships, projects, or collaborations — where
+          I can bring value and grow alongside a driven team. Let's build something great together.
+        </p>
+      </div>
+
+      <!-- Right: Contact info cards (red left border, gray label, bold value) -->
+      <div class="about-info-col reveal" data-testid="about-info-col">
+        <p class="about-info-title">Contact Info</p>
+
+        <!-- Email -->
+        <a href="mailto:shariqmukadam.work@gmail.com" class="aci-row" data-testid="aci-email">
+          <div class="aci-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="aci-label">Email</div>
+            <div class="aci-val">shariqmukadam.work@gmail.com</div>
+          </div>
+        </a>
+
+        <!-- Phone — Replace with actual number -->
+        <a href="tel:<!-- Replace with your phone number -->" class="aci-row" data-testid="aci-phone">
+          <div class="aci-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="aci-label">Phone</div>
+            <!-- Replace below with your actual phone number -->
+            <div class="aci-val">+91 XXXXX XXXXX</div>
+          </div>
+        </a>
+
+        <!-- LinkedIn — Replace with your LinkedIn profile URL -->
+        <a href="https://linkedin.com/in/<!-- Replace with LinkedIn username -->" target="_blank" rel="noopener noreferrer" class="aci-row" data-testid="aci-linkedin">
+          <div class="aci-icon"><i class="fab fa-linkedin-in"></i></div>
+          <div>
+            <div class="aci-label">LinkedIn</div>
+            <!-- Replace below with your LinkedIn display text -->
+            <div class="aci-val">linkedin.com/in/shariqmukadam</div>
+          </div>
+        </a>
+
+        <!-- GitHub — Replace with your GitHub profile URL -->
+        <a href="https://github.com/<!-- Replace with GitHub username -->" target="_blank" rel="noopener noreferrer" class="aci-row" data-testid="aci-github">
+          <div class="aci-icon"><i class="fab fa-github"></i></div>
+          <div>
+            <div class="aci-label">GitHub</div>
+            <!-- Replace below with your GitHub display text -->
+            <div class="aci-val">github.com/shariqmukadam</div>
+          </div>
+        </a>
+
+        <!-- LeetCode — Replace with your LeetCode profile URL -->
+        <a href="https://leetcode.com/<!-- Replace with LeetCode username -->" target="_blank" rel="noopener noreferrer" class="aci-row" data-testid="aci-leetcode">
+          <div class="aci-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <div class="aci-label">LeetCode</div>
+            <!-- Replace below with your LeetCode display text -->
+            <div class="aci-val">leetcode.com/shariqmukadam</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SKILLS SECTION (id="skills")
+     - Section bg: white; only cards are black
+     - Heading: "My Skills" bold black with red underline accent; NO subtitle
+     - 3 filter tabs: DS · DA · Frontend (pill style)
+     - Active tab: black bg, white text, red border
+     - Grid: 4 cards per row (2 on tablet, 1 on mobile)
+     - Card: black bg, subtle red glow shadow
+     - Skill name: white; ring stroke: red; track: #333; % in red, bold
+     - Ring animates on load for active tab + re-triggers on tab switch
+     - Low/Mid/High stat rows removed
+============================================================ -->
+<section id="skills" data-testid="skills-section">
+  <div class="container">
+
+    <div class="skills-section-head reveal">
+      <h2 class="skills-main-title" data-testid="skills-heading">My Skills</h2>
+    </div>
+
+    <!-- 3 filter tabs -->
+    <div class="skills-tabs reveal" data-testid="skills-tabs">
+      <button class="skill-tab active" data-tab="tab-ds" data-testid="skill-tab-ds">DS</button>
+      <button class="skill-tab" data-tab="tab-da" data-testid="skill-tab-da">DA</button>
+      <button class="skill-tab" data-tab="tab-fe" data-testid="skill-tab-fe">Frontend</button>
+    </div>
+
+    <!-- DS Tab Pane: HTML/CSS 75% · Python 85% · SQL 80% · ML 78% · Statistics 82% · Data Wrangling 88% · Scikit-Learn 75% · Deep Learning 65% -->
+    <div class="skill-pane active" id="tab-ds" data-testid="skill-pane-ds">
+      <div class="skills-grid">
+
+        <div class="skill-card reveal" data-testid="skill-html-css">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="75"/></svg>
+            <span class="ring-pct">75%</span>
+          </div>
+          <div class="skill-name">HTML/CSS</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-python">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="85"/></svg>
+            <span class="ring-pct">85%</span>
+          </div>
+          <div class="skill-name">Python</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-sql-ds">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="80"/></svg>
+            <span class="ring-pct">80%</span>
+          </div>
+          <div class="skill-name">SQL</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-ml">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="78"/></svg>
+            <span class="ring-pct">78%</span>
+          </div>
+          <div class="skill-name">Machine Learning</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-statistics">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="82"/></svg>
+            <span class="ring-pct">82%</span>
+          </div>
+          <div class="skill-name">Statistics</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-data-wrangling">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="88"/></svg>
+            <span class="ring-pct">88%</span>
+          </div>
+          <div class="skill-name">Data Wrangling</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-sklearn">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="75"/></svg>
+            <span class="ring-pct">75%</span>
+          </div>
+          <div class="skill-name">Scikit-Learn</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-deep-learning">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="65"/></svg>
+            <span class="ring-pct">65%</span>
+          </div>
+          <div class="skill-name">Deep Learning</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DA Tab Pane: Excel 90% · Power BI 85% · Tableau 80% · SQL 88% · Python(Pandas) 85% · Data Viz 87% · BI 78% · Google Sheets 92% -->
+    <div class="skill-pane" id="tab-da" data-testid="skill-pane-da">
+      <div class="skills-grid">
+
+        <div class="skill-card reveal" data-testid="skill-excel">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="90"/></svg>
+            <span class="ring-pct">90%</span>
+          </div>
+          <div class="skill-name">Excel</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-powerbi">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="85"/></svg>
+            <span class="ring-pct">85%</span>
+          </div>
+          <div class="skill-name">Power BI</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-tableau">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="80"/></svg>
+            <span class="ring-pct">80%</span>
+          </div>
+          <div class="skill-name">Tableau</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-sql-da">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="88"/></svg>
+            <span class="ring-pct">88%</span>
+          </div>
+          <div class="skill-name">SQL</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-pandas">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="85"/></svg>
+            <span class="ring-pct">85%</span>
+          </div>
+          <div class="skill-name">Python (Pandas)</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-data-viz">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="87"/></svg>
+            <span class="ring-pct">87%</span>
+          </div>
+          <div class="skill-name">Data Visualization</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-bi">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="78"/></svg>
+            <span class="ring-pct">78%</span>
+          </div>
+          <div class="skill-name">Business Intelligence</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-gsheets">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="92"/></svg>
+            <span class="ring-pct">92%</span>
+          </div>
+          <div class="skill-name">Google Sheets</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Frontend Tab Pane: HTML 95% · CSS 90% · JS 80% · React 72% · Tailwind 85% · Responsive 88% · Git 83% · REST APIs 75% -->
+    <div class="skill-pane" id="tab-fe" data-testid="skill-pane-fe">
+      <div class="skills-grid">
+
+        <div class="skill-card reveal" data-testid="skill-html-fe">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="95"/></svg>
+            <span class="ring-pct">95%</span>
+          </div>
+          <div class="skill-name">HTML</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-css-fe">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="90"/></svg>
+            <span class="ring-pct">90%</span>
+          </div>
+          <div class="skill-name">CSS</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-js">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="80"/></svg>
+            <span class="ring-pct">80%</span>
+          </div>
+          <div class="skill-name">JavaScript</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-react">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="72"/></svg>
+            <span class="ring-pct">72%</span>
+          </div>
+          <div class="skill-name">React</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-tailwind">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="85"/></svg>
+            <span class="ring-pct">85%</span>
+          </div>
+          <div class="skill-name">Tailwind CSS</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-responsive">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="88"/></svg>
+            <span class="ring-pct">88%</span>
+          </div>
+          <div class="skill-name">Responsive Design</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-git">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="83"/></svg>
+            <span class="ring-pct">83%</span>
+          </div>
+          <div class="skill-name">Git/GitHub</div>
+        </div>
+
+        <div class="skill-card reveal" data-testid="skill-rest">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 118 118"><circle class="ring-bg" cx="59" cy="59" r="49"/><circle class="ring-progress" cx="59" cy="59" r="49" transform="rotate(-90 59 59)" data-pct="75"/></svg>
+            <span class="ring-pct">75%</span>
+          </div>
+          <div class="skill-name">REST APIs</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA BANNER
+     - Minimal height: single thin black strip
+     - Text: "Have a project on your mind?" inline with button
+     - Button: Contact Me (red bg, white text) scrolls to #contact
+     - NO image or avatar
+============================================================ -->
+<section id="cta-banner" data-testid="cta-banner">
+  <div class="container">
+    <div class="cta-strip">
+      <p class="cta-text" data-testid="cta-text">Have a project on your mind?</p>
+      <a href="#contact" class="btn-cta" data-testid="cta-contact-btn">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PROJECTS SECTION (id="projects")
+     - 2 pill tabs: Data Science · Data Analytics
+     - Each tab shows exactly 3 project cards
+     - Card: white bg, black shadow, 4px red top border
+     - Tech stack tags: black pill badges
+     - Hover overlay: dark overlay slides up with 2 buttons:
+         View Live (red bg) + GitHub Repo (black bg, red border)
+     - Replace href="#" with actual project/repo links
+============================================================ -->
+<section id="projects" data-testid="projects-section">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <h2 class="section-h2" data-testid="projects-heading">My Projects</h2>
+      <p class="section-desc">Exploring insights through Data Science &amp; Analytics</p>
+    </div>
+
+    <!-- 2 tabs -->
+    <div class="projects-tabs reveal" data-testid="projects-tabs">
+      <button class="proj-tab active" data-ptab="ptab-ds" data-testid="proj-tab-ds">Data Science</button>
+      <button class="proj-tab" data-ptab="ptab-da" data-testid="proj-tab-da">Data Analytics</button>
+    </div>
+
+    <!-- Data Science — 3 cards -->
+    <div class="proj-pane active" id="ptab-ds" data-testid="proj-pane-ds">
+      <div class="projects-grid">
+
+        <div class="project-card reveal" data-testid="proj-ds-1">
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Predictive Analytics Model</h3>
+            <p class="proj-card-desc">Built an end-to-end predictive model using regression and ensemble methods to forecast key business metrics with high accuracy.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">Scikit-learn</span>
+              <span class="proj-tag">Pandas</span>
+            </div>
+          </div>
+          <div class="proj-overlay">
+            <!-- Replace href with actual live project link -->
+            <a href="#" class="btn-view-live" target="_blank">View Live &#8599;</a>
+            <!-- Replace href with actual GitHub repo link -->
+            <a href="#" class="btn-github-repo" target="_blank">GitHub Repo &#8599;</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-testid="proj-ds-2">
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Customer Churn Prediction</h3>
+            <p class="proj-card-desc">Developed a churn prediction pipeline using XGBoost and SMOTE balancing, achieving 91% recall on a telecom dataset.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">XGBoost</span>
+              <span class="proj-tag">ML</span>
+            </div>
+          </div>
+          <div class="proj-overlay">
+            <!-- Replace href with actual live project link -->
+            <a href="#" class="btn-view-live" target="_blank">View Live &#8599;</a>
+            <!-- Replace href with actual GitHub repo link -->
+            <a href="#" class="btn-github-repo" target="_blank">GitHub Repo &#8599;</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-testid="proj-ds-3">
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">NLP Sentiment Classifier</h3>
+            <p class="proj-card-desc">Implemented a transformer-based sentiment analysis model fine-tuned on product reviews with multi-class classification output.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">NLTK</span>
+              <span class="proj-tag">Deep Learning</span>
+            </div>
+          </div>
+          <div class="proj-overlay">
+            <!-- Replace href with actual live project link -->
+            <a href="#" class="btn-view-live" target="_blank">View Live &#8599;</a>
+            <!-- Replace href with actual GitHub repo link -->
+            <a href="#" class="btn-github-repo" target="_blank">GitHub Repo &#8599;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Data Analytics — 3 cards -->
+    <div class="proj-pane" id="ptab-da" data-testid="proj-pane-da">
+      <div class="projects-grid">
+
+        <div class="project-card reveal" data-testid="proj-da-1">
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Sales Dashboard (Power BI)</h3>
+            <p class="proj-card-desc">Built an interactive multi-page Power BI dashboard consolidating 3 years of sales data, enabling real-time KPI monitoring.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Power BI</span>
+              <span class="proj-tag">SQL</span>
+              <span class="proj-tag">Excel</span>
+            </div>
+          </div>
+          <div class="proj-overlay">
+            <!-- Replace href with actual live project link -->
+            <a href="#" class="btn-view-live" target="_blank">View Live &#8599;</a>
+            <!-- Replace href with actual GitHub repo link -->
+            <a href="#" class="btn-github-repo" target="_blank">GitHub Repo &#8599;</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-testid="proj-da-2">
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">E-Commerce Trend Analysis</h3>
+            <p class="proj-card-desc">Performed deep-dive analysis on 500K+ transactions to uncover seasonal trends and customer segments using Python and Tableau.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">Pandas</span>
+              <span class="proj-tag">Tableau</span>
+            </div>
+          </div>
+          <div class="proj-overlay">
+            <!-- Replace href with actual live project link -->
+            <a href="#" class="btn-view-live" target="_blank">View Live &#8599;</a>
+            <!-- Replace href with actual GitHub repo link -->
+            <a href="#" class="btn-github-repo" target="_blank">GitHub Repo &#8599;</a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-testid="proj-da-3">
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">HR Analytics Report</h3>
+            <p class="proj-card-desc">Created an HR analytics report in Power BI revealing attrition drivers and workforce trends across departments using statistical analysis.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Excel</span>
+              <span class="proj-tag">Power BI</span>
+              <span class="proj-tag">SQL</span>
+            </div>
+          </div>
+          <div class="proj-overlay">
+            <!-- Replace href with actual live project link -->
+            <a href="#" class="btn-view-live" target="_blank">View Live &#8599;</a>
+            <!-- Replace href with actual GitHub repo link -->
+            <a href="#" class="btn-github-repo" target="_blank">GitHub Repo &#8599;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CERTIFICATIONS SECTION (id="certifications")
+     - Heading: "My Certifications" bold black, red underline
+     - 3-col responsive grid
+     - Card: white bg, red top border 4px, black shadow
+     - Issuer initials circle: black bg, white text
+     - Hover: card lifts translateY(-4px)
+     - Duplicate .cert-card blocks for each real certification
+============================================================ -->
+<section id="certifications" data-testid="certifications-section">
+  <div class="container">
+
+    <div class="cert-section-head reveal">
+      <h2 class="cert-main-title" data-testid="cert-heading">My Certifications</h2>
+    </div>
+
+    <!-- Duplicate .cert-card blocks for each real certification -->
+    <div class="certs-grid">
+
+      <div class="cert-card reveal" data-testid="cert-1">
+        <div class="cert-logo">GGL</div>
+        <div class="cert-title">Google Data Analytics Professional Certificate</div>
+        <div class="cert-org">Google</div>
+        <div class="cert-date">Issued: January 2024</div>
+        <!-- Replace href with actual credential URL -->
+        <a href="#" class="cert-link" data-testid="cert-link-1">View Credential <i class="fas fa-arrow-right" style="font-size:0.62rem"></i></a>
+      </div>
+
+      <div class="cert-card reveal" data-testid="cert-2">
+        <div class="cert-logo">IBM</div>
+        <div class="cert-title">IBM Data Science Professional Certificate</div>
+        <div class="cert-org">IBM</div>
+        <div class="cert-date">Issued: September 2023</div>
+        <!-- Replace href with actual credential URL -->
+        <a href="#" class="cert-link" data-testid="cert-link-2">View Credential <i class="fas fa-arrow-right" style="font-size:0.62rem"></i></a>
+      </div>
+
+      <div class="cert-card reveal" data-testid="cert-3">
+        <div class="cert-logo">META</div>
+        <div class="cert-title">Meta Front-End Developer Professional Certificate</div>
+        <div class="cert-org">Meta</div>
+        <div class="cert-date">Issued: June 2023</div>
+        <!-- Replace href with actual credential URL -->
+        <a href="#" class="cert-link" data-testid="cert-link-3">View Credential <i class="fas fa-arrow-right" style="font-size:0.62rem"></i></a>
+      </div>
+
+      <div class="cert-card reveal" data-testid="cert-4">
+        <div class="cert-logo">MSFT</div>
+        <div class="cert-title">Microsoft Excel Expert (MOS) Certification</div>
+        <div class="cert-org">Microsoft</div>
+        <div class="cert-date">Issued: March 2023</div>
+        <!-- Replace href with actual credential URL -->
+        <a href="#" class="cert-link" data-testid="cert-link-4">View Credential <i class="fas fa-arrow-right" style="font-size:0.62rem"></i></a>
+      </div>
+
+      <div class="cert-card reveal" data-testid="cert-5">
+        <div class="cert-logo">TBLO</div>
+        <div class="cert-title">Tableau Desktop Specialist Certification</div>
+        <div class="cert-org">Tableau</div>
+        <div class="cert-date">Issued: November 2023</div>
+        <!-- Replace href with actual credential URL -->
+        <a href="#" class="cert-link" data-testid="cert-link-5">View Credential <i class="fas fa-arrow-right" style="font-size:0.62rem"></i></a>
+      </div>
+
+      <div class="cert-card reveal" data-testid="cert-6">
+        <div class="cert-logo">HBS</div>
+        <div class="cert-title">HubSpot Content Marketing Certification</div>
+        <div class="cert-org">HubSpot</div>
+        <div class="cert-date">Issued: May 2023</div>
+        <!-- Replace href with actual credential URL -->
+        <a href="#" class="cert-link" data-testid="cert-link-6">View Credential <i class="fas fa-arrow-right" style="font-size:0.62rem"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT SECTION (id="contact")
+     - NO subtitle above section
+     - Two-column: form left, "Let's Connect" right
+     - Form: Name, Email, Message — fetch POST to FormSubmit.co
+     - Success/error message inline below submit button
+     - Right: ONLY Email · Phone · LinkedIn (3 items)
+============================================================ -->
+<section id="contact" data-testid="contact-section">
+  <div class="container">
+
+    <div class="contact-head reveal">
+      <h2 class="contact-h2" data-testid="contact-heading">Contact Me</h2>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Left: Contact Form -->
+      <form class="reveal" id="contactForm" data-testid="contact-form" novalidate>
+        <div class="form-group">
+          <label for="cName">Your Name</label>
+          <input type="text" id="cName" name="name" placeholder="John Doe" required data-testid="contact-name-input" />
+        </div>
+        <div class="form-group">
+          <label for="cEmail">Your Email</label>
+          <input type="email" id="cEmail" name="email" placeholder="hello@example.com" required data-testid="contact-email-input" />
+        </div>
+        <div class="form-group">
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" name="message" placeholder="Tell me about your project..." required data-testid="contact-message-input"></textarea>
+        </div>
+        <button type="submit" class="btn-submit" data-testid="contact-submit-btn">Send Message</button>
+        <div class="form-msg" id="formMsg" data-testid="form-response-msg" role="alert"></div>
+      </form>
+
+      <!-- Right: Let's Connect — Email · Phone · LinkedIn ONLY -->
+      <div class="contact-info-side reveal">
+        <span class="ci-tag">Let's Connect</span>
+        <h3 class="ci-title">Always Open to<br>New Opportunities</h3>
+
+        <!-- Email -->
+        <div class="ci-item" data-testid="contact-email-item">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-val">
+              <a href="mailto:shariqmukadam.work@gmail.com">shariqmukadam.work@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone — Replace with actual phone number -->
+        <div class="ci-item" data-testid="contact-phone-item">
+          <div class="ci-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="ci-label">Phone</div>
+            <div class="ci-val">
+              <!-- Replace href and text with your actual phone number -->
+              <a href="tel:<!-- Replace with your phone number -->">+91 XXXXX XXXXX</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- LinkedIn — Replace with your LinkedIn profile URL -->
+        <div class="ci-item" data-testid="contact-linkedin-item">
+          <div class="ci-icon"><i class="fab fa-linkedin-in"></i></div>
+          <div>
+            <div class="ci-label">LinkedIn</div>
+            <div class="ci-val">
+              <!-- Replace href with your actual LinkedIn profile URL -->
+              <a href="https://linkedin.com/in/<!-- Replace with LinkedIn username -->" target="_blank" rel="noopener noreferrer">linkedin.com/in/shariqmukadam</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER (MINIMAL SINGLE BAR)
+     - White bg, black text, border-top: 1px solid #eee
+     - "SHariq Mukadam" in red, centered
+     - No multi-column layout, no links, no social icons
+============================================================ -->
+<footer data-testid="footer">
+  <div class="container">
+    <p class="footer-text" data-testid="footer-text">
+      Coded &amp; Built by <span class="footer-name">SHariq Mukadam</span> &mdash; &copy; 2026 All rights reserved &middot; shariqmukadam.me
+    </p>
+  </div>
+</footer>
+
+
+<!-- Hidden React mount point (CRA requirement — keeps React bundle from throwing) -->
+<div id="root" style="display:none !important; position:absolute; top:-9999px; pointer-events:none; width:0; height:0; overflow:hidden;" aria-hidden="true"></div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     - Navbar: shrink + shadow + active link on scroll (80px threshold)
+     - Logo dot: red on scroll, black on top
+     - Resume dropdowns: toggle open/close on click, close on outside click
+     - Mobile hamburger: toggle menu
+     - Smooth scroll: all anchors
+     - IntersectionObserver: scroll-reveal (.reveal elements)
+     - Skills rings: animate on page load (active pane) + re-trigger on tab switch
+     - Skills tabs: switch pane + re-trigger animations
+     - Projects tabs: switch pane
+     - Contact form: fetch POST to FormSubmit.co, inline success/error
+============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---- NAVBAR: shrink + shadow + logo dot color ---- */
+  var navbar   = document.getElementById('navbar');
+  var navLinks = document.querySelectorAll('.nav-links a');
+  var sections = document.querySelectorAll('section[id]');
+
+  function handleScroll() {
+    var scrollY = window.scrollY || window.pageYOffset;
+    /* 80px threshold for navbar shrink and logo dot animation */
+    if (scrollY > 80) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    /* Active nav link by scroll position */
+    var current = '';
+    sections.forEach(function (sec) {
+      if (scrollY >= sec.offsetTop - 130) {
+        current = sec.getAttribute('id');
+      }
+    });
+    navLinks.forEach(function (link) {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // run once on load
+
+  /* ---- RESUME DROPDOWN (navbar) ---- */
+  var navResumeBtn      = document.getElementById('navResumeBtn');
+  var navResumeDropdown = document.getElementById('navResumeDropdown');
+
+  navResumeBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    navResumeDropdown.classList.toggle('open');
+    navResumeBtn.setAttribute('aria-expanded', navResumeDropdown.classList.contains('open'));
+    heroResumeDropdown.classList.remove('open');
+  });
+
+  /* ---- RESUME DROPDOWN (hero) ---- */
+  var heroResumeBtn      = document.getElementById('heroResumeBtn');
+  var heroResumeDropdown = document.getElementById('heroResumeDropdown');
+
+  heroResumeBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    heroResumeDropdown.classList.toggle('open');
+    navResumeDropdown.classList.remove('open');
+  });
+
+  /* Close both dropdowns on outside click */
+  document.addEventListener('click', function () {
+    navResumeDropdown.classList.remove('open');
+    heroResumeDropdown.classList.remove('open');
+    navResumeBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  /* ---- MOBILE MENU ---- */
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  /* ---- SMOOTH SCROLL for all anchor links ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (href === '#' || href === '#!') return;
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        var offset = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ---- SCROLL REVEAL (.reveal elements) ---- */
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    revealObserver.observe(el);
+  });
+
+  /* ---- SKILL RINGS ---- */
+  /* SVG circle r=49, circumference = 2*PI*49 ≈ 307.88 */
+  var CIRC = 2 * Math.PI * 49;
+
+  /* Initialize all ring-progress circles */
+  document.querySelectorAll('.ring-progress').forEach(function (c) {
+    c.style.strokeDasharray  = CIRC + ' ' + CIRC;
+    c.style.strokeDashoffset = CIRC;
+  });
+
+  /* Animate rings inside a given pane */
+  function animateRingsInPane(pane) {
+    pane.querySelectorAll('.ring-progress').forEach(function (circle) {
+      /* Reset to hidden first */
+      circle.style.transition = 'none';
+      circle.style.strokeDashoffset = CIRC;
+      /* Force reflow then apply animation */
+      void circle.getBoundingClientRect();
+      circle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      var pct    = parseInt(circle.getAttribute('data-pct'), 10);
+      var offset = CIRC - (CIRC * pct / 100);
+      circle.style.strokeDashoffset = offset;
+    });
+  }
+
+  /* IntersectionObserver for first-load animation (active DS pane) */
+  var skillsSection = document.getElementById('skills');
+  var ringObserver  = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      var activePane = document.querySelector('.skill-pane.active');
+      if (activePane) { animateRingsInPane(activePane); }
+      ringObserver.disconnect();
+    }
+  }, { threshold: 0.15 });
+  if (skillsSection) { ringObserver.observe(skillsSection); }
+
+  /* ---- SKILLS TABS ---- */
+  var skillTabs  = document.querySelectorAll('.skill-tab');
+  var skillPanes = document.querySelectorAll('.skill-pane');
+
+  skillTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      skillTabs.forEach(function (t) { t.classList.remove('active'); });
+      skillPanes.forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var targetId   = tab.getAttribute('data-tab');
+      var targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.classList.add('active');
+        /* Re-trigger ring animation on tab switch */
+        setTimeout(function () { animateRingsInPane(targetPane); }, 60);
+      }
+    });
+  });
+
+  /* ---- PROJECTS TABS ---- */
+  var projTabs  = document.querySelectorAll('.proj-tab');
+  var projPanes = document.querySelectorAll('.proj-pane');
+
+  projTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      projTabs.forEach(function (t) { t.classList.remove('active'); });
+      projPanes.forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var targetId   = tab.getAttribute('data-ptab');
+      var targetPane = document.getElementById(targetId);
+      if (targetPane) { targetPane.classList.add('active'); }
+    });
+  });
+
+  /* ---- CONTACT FORM: fetch POST to FormSubmit.co ---- */
+  var contactForm = document.getElementById('contactForm');
+  var formMsg     = document.getElementById('formMsg');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = contactForm.querySelector('.btn-submit');
+      var name    = contactForm.querySelector('[name="name"]').value.trim();
+      var email   = contactForm.querySelector('[name="email"]').value.trim();
+      var message = contactForm.querySelector('[name="message"]').value.trim();
+
+      if (!name || !email || !message) { return; }
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      formMsg.style.display = 'none';
+
+      fetch('https://formsubmit.co/ajax/shariqmukadam.work@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ name: name, email: email, message: message })
+      })
+      .then(function (resp) { return resp.json(); })
+      .then(function (data) {
+        if (data.success === 'true' || data.success === true) {
+          formMsg.style.borderLeftColor = 'var(--red)';
+          formMsg.textContent = "Message sent! I'll get back to you shortly.";
+          contactForm.reset();
+        } else {
+          throw new Error('FormSubmit error');
+        }
+      })
+      .catch(function () {
+        formMsg.style.borderLeftColor = '#ff3333';
+        formMsg.textContent = 'Something went wrong. Please email shariqmukadam.work@gmail.com directly.';
+      })
+      .finally(function () {
+        formMsg.style.display = 'block';
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        setTimeout(function () { formMsg.style.display = 'none'; }, 7000);
+      });
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
