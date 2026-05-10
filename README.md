@@ -18,4 +18,8 @@ Personal portfolio website of Shariq Mukadam — Data Scientist & Data Analyst .
 - Certifications
 - Contact
 
-- ![visitors](https://visitor-badge.laobi.icu/badge?page_id=IamShariqMukadam.shariqmukadam.dev)
+<div align="center">
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=IamShariqMukadam.shariqmukadam.dev)
+
+</div>
