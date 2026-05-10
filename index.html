@@ -1870,6 +1870,44 @@
       .hero-hl-3   { font-size: 1.5rem; }
     }
 
+    /* ============================================================
+   MOBILE-ONLY FIXES — max-width 768px
+   Desktop is completely unaffected
+============================================================ */
+@media (max-width: 768px) {
+
+  /* FIX 1: Hero tag "DATA SCIENTIST & DATA ANALYST" — force single line */
+  .hero-tag {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  /* FIX 2: Skills tabs — all 3 on one row, no wrapping */
+  .skills-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+  }
+
+  .skill-tab {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+
+  /* FIX 3: Send Message button — centered on mobile */
+  .btn-submit {
+    display: block;
+    margin: 0 auto;
+  }
+
+}
+
   </style>
 </head>
 <body>
