@@ -3383,7 +3383,20 @@
       var message = contactForm.querySelector('[name="message"]').value.trim();
 
       /* Basic validation: all fields required */
-      if (!name || !email || !message) { return; }
+      /* Validation: all fields required + proper email format */
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!name || !email || !message) {
+        formMsg.style.display = 'block';
+        formMsg.style.borderLeftColor = '#ff3333';
+        formMsg.textContent = 'Please fill in all fields.';
+        return;
+      }
+      if (!emailRegex.test(email)) {
+        formMsg.style.display = 'block';
+        formMsg.style.borderLeftColor = '#ff3333';
+        formMsg.textContent = 'Please enter a valid email address.';
+        return;
+      }
 
       /* Disable button while sending */
       btn.textContent = 'Sending...';
