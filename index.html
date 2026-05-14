@@ -1250,6 +1250,20 @@
       font-weight: 800;
       color: #111;
       margin-bottom: 10px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 14px;
+    }
+
+    .section-h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 56px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 2px;
     }
 
     .section-desc {
