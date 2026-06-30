@@ -1321,6 +1321,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 26px;
+      align-items: stretch;
     }
 
     /* ── PROJECT CARD ─────────────────────────────────────────
@@ -1336,6 +1337,8 @@
       overflow: hidden;
       position: relative;
       transition: box-shadow 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
@@ -1345,6 +1348,9 @@
 
     .proj-card-body {
       padding: 32px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .proj-card-title {
@@ -1367,6 +1373,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
+      margin-top: auto;
     }
 
     .proj-tag {
